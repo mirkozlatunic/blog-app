@@ -17,7 +17,7 @@ interface CreatePostFormState {
   errors: {
     title?: string[];
     content?: string[];
-    _formId?: string[];
+    _form?: string[];
   };
 }
 
@@ -33,6 +33,15 @@ export async function createPost(
   if (!result.success) {
     return {
       errors: result.error.flatten().fieldErrors,
+    };
+  }
+
+  const session = await auth();
+  if (!session || !session.user) {
+    return {
+      errors: {
+        _form: ["You must be logged in to view this"],
+      },
     };
   }
 
