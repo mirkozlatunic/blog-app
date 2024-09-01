@@ -40,6 +40,7 @@ export default function CommentCreateForm({
         <Textarea
           name="content"
           label="Reply"
+          labelPlacement="inside"
           placeholder="Enter your comment"
           isInvalid={!!formState.errors.content}
           errorMessage={formState.errors.content?.join(", ")}
